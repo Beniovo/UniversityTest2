@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_home_fedSchActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="0"
+            android:text="Home"
+            android:textColor="#FFFFFF"
+             />
+
+        <EditText
+            android:id="@+id/txt_search_fedschActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="1"
+            android:ems="12"
+            android:hint="type uni name"
+            android:inputType="none" />
+
+        <SearchView
+            android:id="@+id/bt_search_fedschActivity"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:layout_marginEnd="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/fedUniesbt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="10dp"
+            android:clickable="true"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center|center_horizontal"
+            android:minHeight="120dip"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:text="FEDERAL UNIVERSITIES"
+            android:textSize="18sp"
+            android:backgroundTint="@color/primary"
+            app:iconPadding="8dp" />
+
+        <Button
+            android:id="@+id/stateUnibt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="10dp"
+            android:clickable="true"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center|center_horizontal"
+            android:minHeight="120dip"
+            android:text="STATE UNIVERSITIES"
+            android:textSize="18sp"
+            app:backgroundTint="@color/primary"
+             />
+
+        <Button
+            android:id="@+id/privateUnibt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginBottom="10dp"
+            android:clickable="true"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center|center_horizontal"
+            android:minHeight="120dip"
+            android:text="PRIVATE UNIVERSITIES"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:backgroundTint="@color/primary"
+             />
+
+    </LinearLayout>
+
+</LinearLayout>
