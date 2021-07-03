@@ -25,6 +25,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private final Context mycontext;
     private static final String DB_PATH = "/data/data/com.example.universitytest2/databases/";
 
+
     public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DB_NAME, factory, DB_VERSION);
         this.mycontext = context;
@@ -114,7 +115,6 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
 
 
-
         Cursor c = db.rawQuery("select distinct state from Institution", null);
 
         while(c.moveToNext()){
@@ -125,4 +125,28 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return s;
     }
+
+    public ArrayList<String> getGeozones(){
+
+        try{
+            createDatabase();
+        }catch (IOException e){
+            throw new Error("can do it");
+        }
+        ArrayList<String> t = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+
+
+
+        Cursor d = db.rawQuery("select distinct city from Institution", null);
+
+        while(d.moveToNext()){
+            t.add(d.getString(0));
+        }
+        d.close();
+        db.close();
+
+        return t;
+    }
+
 }
