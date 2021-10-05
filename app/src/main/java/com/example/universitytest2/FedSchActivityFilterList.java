@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -23,6 +24,8 @@ public class FedSchActivityFilterList extends Fragment  {
     ArrayList<String> array_lst;
     ArrayAdapter<ArrayList<String>> arrayListArrayAdapter;
     Spinner spinner;
+
+
     View v;
 
     public FedSchActivityFilterList() {
@@ -53,18 +56,30 @@ public class FedSchActivityFilterList extends Fragment  {
         //tv_test.setText(dbHelper.getStates());
 
 
-         FedSchoolsActivity fedSchoolsActivity = (FedSchoolsActivity)getActivity();
-         String f = fedSchoolsActivity.getText();;
-         if (f.equals("State")) {
+        array_lst = dbHelper.getStates();
 
-             array_lst = dbHelper.getStates();
-         }
-         else if(f.equals("GeoPoliticalZone")){
-             array_lst = dbHelper.getGeozones();
-         }
         arrayListArrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, array_lst);
         lst_filteredby.setAdapter(arrayListArrayAdapter);
+        lst_filteredby.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                //hmmmm...this gets the schools from the list to use in the next activity
+                String getSchooltag = (String)parent.getItemAtPosition(position).toString();
+                int sOrg = 0;
+                Bundle bundle = new Bundle();
+                bundle.putString("filter", getSchooltag);
+                bundle.putInt("sorg", sOrg);
+                FedschActivitySchoolsList f2 = new FedschActivitySchoolsList();
+                f2.setArguments(bundle);
+                getParentFragmentManager().beginTransaction().replace(
+                        R.id.frag_schoolList_fedActivity, f2).commit();
+
+            }
+        });
+
+
     }
 
-
+//String data=(String)arg0.getItemAtPosition(arg2);
 }

@@ -149,4 +149,31 @@ public class DBHelper extends SQLiteOpenHelper {
         return t;
     }
 
+    public ArrayList<String> getSchools(int tag, String filtertag){
+
+        try{
+            createDatabase();
+        }catch (IOException e){
+            throw new Error("can do it");
+        }
+        ArrayList<String> t = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor d = null;
+
+
+        if (tag == 0) {
+            d = db.rawQuery("select distinct name from Institution where state ="
+                    + " \"" + filtertag + "\"", null);
+        }
+        while(true){
+            assert d != null;
+            if (!d.moveToNext()) break;
+            t.add(d.getString(0));
+        }
+        d.close();
+        db.close();
+
+        return t;
+    }
+
 }

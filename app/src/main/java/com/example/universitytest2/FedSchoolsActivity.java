@@ -25,7 +25,7 @@ public class FedSchoolsActivity extends AppCompatActivity {
         myfragManager = this.getSupportFragmentManager();
         fedSchActivityFilterList = (FedSchActivityFilterList) myfragManager.findFragmentById(R.id.frag_sortby_fedschActivity);
         fedschActivitySchoolsList = (FedschActivitySchoolsList) myfragManager.findFragmentById(R.id.frag_schoolList_fedActivity);
-        getfilter();
+
         myfragManager.beginTransaction().
                 show(fedSchActivityFilterList).commit();
         myfragManager.beginTransaction().
