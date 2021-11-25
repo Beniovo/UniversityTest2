@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginStart="0dp"
     android:layout_marginLeft="0dp"
     android:orientation="vertical">
@@ -18,39 +18,37 @@
             android:id="@+id/bt_home_fedSchActivity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginBottom="20dp"
-            android:layout_weight="1"
+
             android:text="Home"
             android:textColor="#FFFFFF"
-                       />
+            app:iconPadding="0dp" />
 
-        <EditText
-            android:id="@+id/txt_search_fedschActivity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginBottom="20dp"
-            android:layout_weight="1"
-            android:ems="12"
-            android:hint="type uni name"
-            android:inputType="none" />
-
-        <SearchView
-            android:id="@+id/bt_search_fedschActivity"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp"
-            android:layout_marginEnd="3dp"
-            android:layout_marginRight="3dp"
-            android:layout_marginBottom="20dp"
-            android:layout_weight="1" />
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_weight="1">
+
+            <ListView
+                android:id="@+id/searchForLV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/bt_search_fedschActivity" />
+
+            <SearchView
+                android:id="@+id/bt_search_fedschActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:iconifiedByDefault="false">
+
+            </SearchView>
+        </RelativeLayout>
+
+
     </LinearLayout>
 
     <LinearLayout

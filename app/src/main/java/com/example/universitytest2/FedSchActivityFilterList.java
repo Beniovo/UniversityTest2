@@ -24,6 +24,8 @@ public class FedSchActivityFilterList extends Fragment  {
     ArrayList<String> array_lst;
     ArrayAdapter<ArrayList<String>> arrayListArrayAdapter;
     Spinner spinner;
+    int f;
+    int filterFlag;
 
 
     View v;
@@ -58,15 +60,69 @@ public class FedSchActivityFilterList extends Fragment  {
 
         array_lst = dbHelper.getStates();
 
-        arrayListArrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, array_lst);
-        lst_filteredby.setAdapter(arrayListArrayAdapter);
+        // get activity into fragment
+        FedSchoolsActivity fedSchoolsActivity = (FedSchoolsActivity)getActivity();
+
+        // get spinner from activity
+        Spinner s = fedSchoolsActivity.spinner;
+
+        s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                f = position;
+                //change filtering according to value of f
+                if (f == 0)  { //first position
+                    ArrayList<String> array_lst1;
+                    filterFlag = 0;
+
+                    array_lst1 = dbHelper.getStates();
+                    arrayListArrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, array_lst1);
+                    lst_filteredby.setAdapter(arrayListArrayAdapter);
+                }
+                else if(f==1){
+                    ArrayList<String> array_lst2;
+                    filterFlag = 1;
+                    array_lst2 = dbHelper.getGeozones();
+                    arrayListArrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, array_lst2);
+                    lst_filteredby.setAdapter(arrayListArrayAdapter);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {  // Initialize the spinner
+                ArrayList<String> array_lst1;
+
+                array_lst1 = dbHelper.getStates();
+                arrayListArrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, array_lst1);
+                lst_filteredby.setAdapter(arrayListArrayAdapter);
+
+            }
+        });
+        onClicked();
+
+
+
+
+
+    }
+
+    public void onClicked() {
+
+        //arrayListArrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, array_lst);
+       // lst_filteredby.setAdapter(arrayListArrayAdapter);
         lst_filteredby.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 //hmmmm...this gets the schools from the list to use in the next activity
-                String getSchooltag = (String)parent.getItemAtPosition(position).toString();
+                String getSchooltag = (String) parent.getItemAtPosition(position).toString();
                 int sOrg = 0;
+                if(f == 0){
+                    sOrg = 0;}
+                    else if ( f== 1){
+                        sOrg = 1;
+                }
                 Bundle bundle = new Bundle();
                 bundle.putString("filter", getSchooltag);
                 bundle.putInt("sorg", sOrg);
@@ -77,9 +133,8 @@ public class FedSchActivityFilterList extends Fragment  {
 
             }
         });
-
-
     }
+
 
 //String data=(String)arg0.getItemAtPosition(arg2);
 }

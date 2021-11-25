@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class DBHelper extends SQLiteOpenHelper {
 
     public static final int DB_VERSION = 1;
-    private static final String DB_NAME = "uni2db.db";
+    private static final String DB_NAME = "unidb.db";
     public SQLiteDatabase myDatabase;
     private final Context mycontext;
     private static final String DB_PATH = "/data/data/com.example.universitytest2/databases/";
@@ -138,7 +138,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
 
-        Cursor d = db.rawQuery("select distinct city from Institution", null);
+        Cursor d = db.rawQuery("select distinct geozone from Institution", null);
 
         while(d.moveToNext()){
             t.add(d.getString(0));
@@ -165,15 +165,104 @@ public class DBHelper extends SQLiteOpenHelper {
             d = db.rawQuery("select distinct name from Institution where state ="
                     + " \"" + filtertag + "\"", null);
         }
+        //while(true){
+           // assert d != null;
+            //if (!d.moveToNext()) break;
+           // t.add(d.getString(0));
+       // }
+
+        else if (tag == 1){
+            d = db.rawQuery("select distinct name from Institution where geozone ="
+                    + " \"" + filtertag + "\"", null);
+
+        }
         while(true){
             assert d != null;
             if (!d.moveToNext()) break;
             t.add(d.getString(0));
         }
+
         d.close();
         db.close();
 
         return t;
     }
 
+    public String getWebsite(String school){
+
+        try{
+            createDatabase();
+        }catch (IOException e){
+            throw new Error("can do it");
+        }
+        String s = "";
+
+        SQLiteDatabase db = getReadableDatabase();
+
+
+        Cursor c = db.rawQuery("select distinct website from Institution where name ="
+
+                        + " \"" + school + "\"", null);
+
+
+        while(c.moveToNext()){
+            s = c.getString(0);
+        }
+       // s = t.get(0);
+
+        c.close();
+        db.close();
+
+        return s;
+    }
+
+    public String getState(String school){
+
+        try{
+            createDatabase();
+        }catch (IOException e){
+            throw new Error("can do it");
+        }
+        String s = "";
+
+        SQLiteDatabase db = getReadableDatabase();
+
+
+        Cursor c = db.rawQuery("select distinct state from Institution where name ="
+
+                + " \"" + school + "\"", null);
+
+
+        while (c.moveToNext()) {
+            s = c.getString(0);
+        }
+        c.close();
+        db.close();
+
+        return s;
+    }
+
+    public ArrayList<String> getallSchools() {
+
+        try {
+            createDatabase();
+        } catch (IOException e) {
+            throw new Error("can do it");
+        }
+        ArrayList<String> t = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor d = null;
+
+        d = db.rawQuery("select  name from Institution", null);
+
+        while (true) {
+            assert d != null;
+            if (!d.moveToNext()) break;
+            t.add(d.getString(0));
+        }
+
+        d.close();
+        db.close();
+        return t;
+    }
 }
