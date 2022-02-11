@@ -8,11 +8,10 @@
 
 
     <ListView
-        android:id="@+id/lst_fedAct_schoolList"
+        android:id="@+id/lst_StateAct_schoolList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:dividerHeight="1dp"
         android:background="#ad5"
-        android:clickable="true"
-        android:divider="@color/primaryDark"
-        android:dividerHeight="1dp" />
+        android:divider="@color/primaryDark" />
 </LinearLayout>

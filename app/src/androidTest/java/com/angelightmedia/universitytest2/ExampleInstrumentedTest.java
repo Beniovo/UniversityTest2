@@ -1,4 +1,4 @@
-package com.example.universitytest2;
+package com.angelightmedia.universitytest2;
 
 import android.content.Context;
 

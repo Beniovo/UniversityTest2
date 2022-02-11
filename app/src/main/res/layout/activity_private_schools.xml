@@ -17,13 +17,12 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/bt_home_fedSchActivity"
+            android:id="@+id/bt_home_PrivateSchActivity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
             android:text="Home"
             android:textColor="#FFFFFF"
-            android:textSize="12sp"
             app:backgroundTint="@color/primaryDark"
             app:iconPadding="0dp" />
 
@@ -31,25 +30,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_weight="1"
-            android:background="@color/primaryLight">
+            android:layout_weight="1">
 
             <ListView
-                android:id="@+id/searchForLV"
+                android:id="@+id/searchForLVprivate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/bt_search_fedschActivity"
-                android:visibility="visible" />
+                android:layout_below="@id/bt_search_privateschActivity" />
 
             <SearchView
-                android:id="@+id/bt_search_fedschActivity"
+                android:id="@+id/bt_search_privateschActivity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
-                android:background="@android:color/holo_green_light"
                 android:iconifiedByDefault="false">
 
             </SearchView>
@@ -61,30 +57,29 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/primaryLight"
+        android:background="@android:color/white"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/holo_green_light"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/tv_sortby_fedschActivity"
+                android:id="@+id/tv_sortby_privateschActivity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_weight="0"
-                android:background="@android:color/holo_green_dark"
+                android:background="@android:color/holo_green_light"
                 android:shadowColor="#8BC34A"
                 android:text="Sort By"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
             <Spinner
-                android:id="@+id/spinner_fedschActivity"
+                android:id="@+id/spinner_privateschActivity"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="0"
@@ -100,7 +95,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="170dp"
-        android:text="FEDERAL UNIVERSITIES"
+        android:text="@string/private_universities"
         android:textAlignment="center"
         android:textColor="@android:color/holo_green_dark"
         android:textSize="12sp" />
@@ -111,8 +106,8 @@
         android:background="@android:color/white">
 
         <fragment
-            android:id="@+id/frag_sortby_fedschActivity"
-            android:name="com.angelightmedia.universitytest2.FedSchActivityFilterList"
+            android:id="@+id/frag_sortby_privateschActivity"
+            android:name="com.angelightmedia.universitytest2.PrivateSchActivityFilterList"
             android:layout_width="165dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -121,14 +116,14 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <fragment
-            android:id="@+id/frag_schoolList_fedActivity"
-            android:name="com.angelightmedia.universitytest2.FedschActivitySchoolsList"
+            android:id="@+id/frag_schoolList_privateActivity"
+            android:name="com.angelightmedia.universitytest2.PrivateSchActivitySchoolsList"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="5dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/frag_sortby_fedschActivity"
+            app:layout_constraintStart_toEndOf="@+id/frag_sortby_privateschActivity"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

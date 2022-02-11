@@ -1,4 +1,4 @@
-package com.example.universitytest2;
+package com.angelightmedia.universitytest2;
 
 import android.os.Bundle;
 
@@ -13,10 +13,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 
-// the fragment that shows how i will filter the scools
+
+// the fragment that shows how i will filter the schools
 public class FedSchActivityFilterList extends Fragment  {
 
     ListView lst_filteredby;
@@ -61,9 +62,10 @@ public class FedSchActivityFilterList extends Fragment  {
         array_lst = dbHelper.getStates();
 
         // get activity into fragment
-        FedSchoolsActivity fedSchoolsActivity = (FedSchoolsActivity)getActivity();
+        FedSchoolsActivity fedSchoolsActivity = (FedSchoolsActivity)getActivity(); // tryigm
 
         // get spinner from activity
+        assert fedSchoolsActivity != null;
         Spinner s = fedSchoolsActivity.spinner;
 
         s.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -77,6 +79,9 @@ public class FedSchActivityFilterList extends Fragment  {
                     filterFlag = 0;
 
                     array_lst1 = dbHelper.getStates();
+
+                    Collections.sort(array_lst1);
+
                     arrayListArrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, array_lst1);
                     lst_filteredby.setAdapter(arrayListArrayAdapter);
                 }
@@ -84,6 +89,9 @@ public class FedSchActivityFilterList extends Fragment  {
                     ArrayList<String> array_lst2;
                     filterFlag = 1;
                     array_lst2 = dbHelper.getGeozones();
+
+                    Collections.sort(array_lst2);
+                    //array_lst2.remove(3); //patch work trying to remove "None"
                     arrayListArrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, array_lst2);
                     lst_filteredby.setAdapter(arrayListArrayAdapter);
                 }
@@ -94,6 +102,8 @@ public class FedSchActivityFilterList extends Fragment  {
                 ArrayList<String> array_lst1;
 
                 array_lst1 = dbHelper.getStates();
+
+                Collections.sort(array_lst1);
                 arrayListArrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, array_lst1);
                 lst_filteredby.setAdapter(arrayListArrayAdapter);
 
@@ -117,7 +127,7 @@ public class FedSchActivityFilterList extends Fragment  {
 
                 //hmmmm...this gets the schools from the list to use in the next activity
                 String getSchooltag = (String) parent.getItemAtPosition(position).toString();
-                int sOrg = 0;
+                int sOrg = 0; // 0 means filter with state 1 is filter with geozone
                 if(f == 0){
                     sOrg = 0;}
                     else if ( f== 1){

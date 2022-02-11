@@ -11,5 +11,10 @@
         android:id="@+id/lst_fedAct_filterBy"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clickable="true" />
+        android:background="@color/primaryDark"
+        android:clickable="true"
+        android:divider="#ad5"
+        android:listSelector="@color/accent"
+        android:dividerHeight="1dp"
+        android:splitMotionEvents="true" />
 </LinearLayout>

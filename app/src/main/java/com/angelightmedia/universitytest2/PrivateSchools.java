@@ -1,4 +1,4 @@
-package com.example.universitytest2;
+package com.angelightmedia.universitytest2;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -9,8 +9,8 @@ import android.database.MatrixCursor;
 import android.os.Bundle;
 import android.provider.BaseColumns;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -20,39 +20,43 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-//activity showing both fragments
+public class PrivateSchools extends AppCompatActivity {
 
-public class FedSchoolsActivity extends AppCompatActivity {
     FragmentManager myfragManager;
-    FedSchActivityFilterList fedSchActivityFilterList;
-    FedschActivitySchoolsList fedschActivitySchoolsList;
+    PrivateSchActivityFilterList privateSchActivityFilterList;
+    PrivateSchActivitySchoolsList privateschActivitySchoolsList;
     Spinner spinner;
     SearchView mySearchview;
     ListView myListView;
     SimpleCursorAdapter arrayAdapter;
     ArrayList<String> schoolslist;
-
+    Button bt_private_activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fed_schools);
-        spinner = (Spinner)findViewById(R.id.spinner_fedschActivity);
-
+        setContentView(R.layout.activity_private_schools);
+        spinner = (Spinner)findViewById(R.id.spinner_privateschActivity);
+        bt_private_activity = findViewById(R.id.bt_home_PrivateSchActivity);
         myfragManager = this.getSupportFragmentManager();
-        fedSchActivityFilterList = (FedSchActivityFilterList) myfragManager.findFragmentById(R.id.frag_sortby_fedschActivity);
-        fedschActivitySchoolsList = (FedschActivitySchoolsList) myfragManager.findFragmentById(R.id.frag_schoolList_fedActivity);
+        privateSchActivityFilterList = (PrivateSchActivityFilterList) myfragManager.findFragmentById(R.id.frag_sortby_privateschActivity);
+        privateschActivitySchoolsList = (PrivateSchActivitySchoolsList) myfragManager.findFragmentById(R.id.frag_schoolList_privateActivity);
 
         myfragManager.beginTransaction().
-                show(fedSchActivityFilterList).commit();
+                show(privateSchActivityFilterList).commit();
         myfragManager.beginTransaction().
-                show(fedschActivitySchoolsList).commit();
-        mySearchview = findViewById(R.id.bt_search_fedschActivity);
-        myListView = findViewById(R.id.searchForLV);
+                show(privateschActivitySchoolsList).commit();
+        mySearchview = findViewById(R.id.bt_search_privateschActivity);
+        myListView = findViewById(R.id.searchForLVprivate);
+        useSearchview();
+        bt_private_activity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(i);
+            }
+        });
 
-        SearchViewCommand searchViewCommand = new SearchViewCommand();
-
-        searchViewCommand.useSearchView(mySearchview, myListView);
     }
 
     private void getfilter(){
@@ -66,14 +70,13 @@ public class FedSchoolsActivity extends AppCompatActivity {
         return spinner.getSelectedItem().toString();
     }
 
-/*
     public void useSearchview(){  // populate searchview
 
         DBHelper dbHelper = new DBHelper(this, null, null, 1);
 
         schoolslist = dbHelper.getallSchools(); //get all schools from db
 
-        mySearchview = findViewById(R.id.bt_search_fedschActivity);
+        mySearchview = findViewById(R.id.bt_search_privateschActivity);
         mySearchview.setQueryHint("type name of school");
         final String[] from = new String[] {"schoolsName"};
         final int[] to = new int[] {android.R.id.text1};
@@ -97,10 +100,10 @@ public class FedSchoolsActivity extends AppCompatActivity {
             @Override
             public boolean onSuggestionClick(int position) {
                 Cursor cursor = (Cursor) arrayAdapter.getItem(position);
-                String txt = cursor.getString(cursor.getColumnIndex("schoolsName"));
-                mySearchview.setQuery(txt, true);
+                //String txt = cursor.getString(cursor.getColumnIndex("schoolsName"));
+                //mySearchview.setQuery(txt, true);
                 Intent intent = new Intent(getApplicationContext(), School_Details.class);
-                intent.putExtra("sname", txt);
+                //intent.putExtra("sname", txt);
                 startActivity(intent);
                 return true;
             }
@@ -130,14 +133,11 @@ public class FedSchoolsActivity extends AppCompatActivity {
     }
 
     public void populateAdaptor(String query) {
-        final MatrixCursor c = new MatrixCursor(new String[]{ BaseColumns._ID, "schoolsName" });
-        for (int i=0; i<schoolslist.size(); i++) {
+        final MatrixCursor c = new MatrixCursor(new String[]{BaseColumns._ID, "schoolsName"});
+        for (int i = 0; i < schoolslist.size(); i++) {
             if (schoolslist.get(i).toLowerCase().startsWith(query.toLowerCase()))
-                c.addRow(new Object[] {i, schoolslist.get(i)});
+                c.addRow(new Object[]{i, schoolslist.get(i)});
         }
         arrayAdapter.changeCursor(c);
     }
-      */
 }
-
-

@@ -1,12 +1,11 @@
-package com.example.universitytest2;
+package com.angelightmedia.universitytest2;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.provider.BaseColumns;
-import android.widget.ArrayAdapter;
 import android.widget.CursorAdapter;
-import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
@@ -22,7 +21,7 @@ public class SearchViewCommand extends AppCompatActivity {
     SimpleCursorAdapter arrayAdapter;
 
 
-    public void useSearchView(SearchView mySearchview, ListView myListView){
+    public void useSearchView(SearchView mySearchview){  // dont think I used this class at all o
         dbHelper = new DBHelper(this, null, null, 1);
 
         schoolslist = dbHelper.getallSchools(); //get all schools from db
@@ -51,7 +50,7 @@ public class SearchViewCommand extends AppCompatActivity {
             @Override
             public boolean onSuggestionClick(int position) {
                 Cursor cursor = (Cursor) arrayAdapter.getItem(position);
-                String txt = cursor.getString(cursor.getColumnIndex("schoolsName"));
+                @SuppressLint("Range") String txt = cursor.getString(cursor.getColumnIndex("schoolsName"));
                 mySearchview.setQuery(txt, true);
                 Intent intent = new Intent(getApplicationContext(), School_Details.class);
                 intent.putExtra("sname", txt);

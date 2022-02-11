@@ -1,4 +1,4 @@
-package com.example.universitytest2;
+package com.angelightmedia.universitytest2;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,19 +15,20 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-public class FedschActivitySchoolsList extends Fragment {
+public class StateSchActivitySchools extends Fragment {
+
     ListView lst_schoolList;
     DBHelper db;
     ArrayList<String> array_lst;
-    String tag;
-    int filterTag;
+    String tagS;
+    int filterTagS;
     ArrayAdapter<ArrayList<String>> arrayListArrayAdapter;
     View v;
 
 
 
 
-    public FedschActivitySchoolsList() {
+    public StateSchActivitySchools() {
         // Required empty public constructor
     }
 
@@ -43,12 +44,12 @@ public class FedschActivitySchoolsList extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        v =  inflater.inflate(R.layout.fragment_fedsch_activity_schools_list, container, false);
+        v =  inflater.inflate(R.layout.fragment_state_sch_activity_schools, container, false);
         // get data from filter frag
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            tag = bundle.getString("filter", "LAGOS STATE");
-            filterTag = bundle.getInt("sorg", 0);
+            tagS = bundle.getString("filterS", "LAGOS STATE");
+            filterTagS = bundle.getInt("sorgS", 0);
         }
         return v;
     }
@@ -57,12 +58,12 @@ public class FedschActivitySchoolsList extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {  //attaches the filter to list?
         super.onActivityCreated(savedInstanceState);
-        lst_schoolList = v.findViewById(R.id.lst_fedAct_schoolList);
+        lst_schoolList = v.findViewById(R.id.lst_StateAct_schoolList);
         DBHelper dbHelper = new DBHelper(getContext(), null,null, 1);
         //tv_test.setText(dbHelper.getStates());
         //
         // i used 'filter' and 'tag' as variables for the getSchools method..brilliant
-        array_lst = dbHelper.getSchools(filterTag, tag);
+        array_lst = dbHelper.getSchools(filterTagS, tagS, "%State%");
         arrayListArrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, array_lst);
         lst_schoolList.setAdapter(arrayListArrayAdapter);
 
@@ -76,8 +77,8 @@ public class FedschActivitySchoolsList extends Fragment {
                 intent.putExtra("sname", schoolname);
                 startActivity(intent);
 
-                
+
             }
         });
     }
-}
+    }

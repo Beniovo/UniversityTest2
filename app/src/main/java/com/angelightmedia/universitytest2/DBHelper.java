@@ -1,4 +1,4 @@
-package com.example.universitytest2;
+package com.angelightmedia.universitytest2;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -23,7 +23,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String DB_NAME = "unidb.db";
     public SQLiteDatabase myDatabase;
     private final Context mycontext;
-    private static final String DB_PATH = "/data/data/com.example.universitytest2/databases/";
+    private static final String DB_PATH = "/data/data/com.angelightmedia.universitytest2/databases/";
 
 
     public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
@@ -149,7 +149,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return t;
     }
 
-    public ArrayList<String> getSchools(int tag, String filtertag){
+    public ArrayList<String> getSchools(int tag, String filtertag, String ownerstag){
 
         try{
             createDatabase();
@@ -163,7 +163,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
         if (tag == 0) {
             d = db.rawQuery("select distinct name from Institution where state ="
-                    + " \"" + filtertag + "\"", null);
+                    + " \"" + filtertag + "\"" + " AND ownership LIKE" +
+                    " \"" + ownerstag + "\"", null); // remember the first two qoutes == one string
         }
         //while(true){
            // assert d != null;
@@ -173,7 +174,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
         else if (tag == 1){
             d = db.rawQuery("select distinct name from Institution where geozone ="
-                    + " \"" + filtertag + "\"", null);
+                    + " \"" + filtertag + "\"" + " AND ownership LIKE" +
+                    " \"" + ownerstag + "\"", null);
 
         }
         while(true){
@@ -251,9 +253,9 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         ArrayList<String> t = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
-        Cursor d = null;
 
-        d = db.rawQuery("select  name from Institution", null);
+         Cursor d = null;
+         d = db.rawQuery("select  name from Institution", null);
 
         while (true) {
             assert d != null;
